@@ -29,22 +29,24 @@ class DatabaseHelper ( var context: Context, ): SQLiteOpenHelper(
     }
 
     private val CREATE_MENU_TABLE = ("CREATE TABLE " + TABLE_MENU + "("
-            + COLUMN_ID_MENU + "INT PRIMARY KEY, " + COLUMN_NAMA_MENU +" TEXT, "
-            + COLUMN_PRICE_MENU + " INT, " + COLUMN_IMAGE +" BLOB")
+            + COLUMN_ID_MENU + " INT PRIMARY KEY, " + COLUMN_NAMA_MENU +" TEXT, "
+            + COLUMN_PRICE_MENU + " INT, " + COLUMN_IMAGE +" BLOB);")
+
 
     private val DROP_MENU_TABLE = "DROP TABLE IF EXISTS $TABLE_MENU"
 
 
-    private val CREATE_ACCOUNT_TABLE = ("CREATE TABLE" + TABLE_ACCOUNT + "("
+    private val CREATE_ACCOUNT_TABLE = ("CREATE TABLE " + TABLE_ACCOUNT + "("
             + COLUMN_EMAIL + " TEXT PRIMARY KEY, "+ COLUMN_NAME +" TEXT, "
-            + COLUMN_LEVEL + " TEXT, "+ COLUMN_PASSWORD +" TEXT)")
+            + COLUMN_LEVEL + " TEXT, "+ COLUMN_PASSWORD +" TEXT);")
 
     private val DROP_ACCOUNT_TABLE = "DROP TABLE IF EXISTS $TABLE_ACCOUNT"
 
     override fun onCreate(p0: SQLiteDatabase?) {
         p0?.execSQL(CREATE_ACCOUNT_TABLE)
-        p0?.execSQL(CREATE_ACCOUNT_TABLE)
+        p0?.execSQL(CREATE_MENU_TABLE)
     }
+
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
         p0?.execSQL(DROP_ACCOUNT_TABLE)
@@ -70,10 +72,8 @@ class DatabaseHelper ( var context: Context, ): SQLiteOpenHelper(
         cursor.close()
         db.close()
 
-        if(cursorCount > 0)
-            return true
-        else
-            return true
+        return cursorCount > 0
+
     }
 
     fun addAccount(email:String, name:String, level:String, password:String) {
@@ -96,7 +96,6 @@ class DatabaseHelper ( var context: Context, ): SQLiteOpenHelper(
         }
         db.close()
     }
-
     @SuppressLint("Range")
     fun checkData(email:String):String{
         val colums = arrayOf(COLUMN_NAME)

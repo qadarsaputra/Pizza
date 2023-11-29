@@ -29,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
 
             val data:String = databaseHelper.checkData(email)
 
-            if (data == null){
+            if (data == ""){
                 databaseHelper.addAccount(
                     email, name, level, password)
 

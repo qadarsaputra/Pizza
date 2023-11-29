@@ -12,7 +12,7 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
 
         //hide title bar
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
         //instance button next
         val btnNext:Button = findViewById(R.id.buttonNext)
